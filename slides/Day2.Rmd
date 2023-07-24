@@ -1,0 +1,1240 @@
+---
+title: "Hello, R Markdown!"
+subtitle: "Day 2: Applications"
+author: "<br/> Ulrik Lyngs <br/> Department of Computer Science <br/> University of Oxford"
+date: "13 March 2019"
+output:
+  xaringan::moon_reader:
+    includes:
+       in_header: "../GA_Script.html"
+    seal: false
+    chakra: libs/remark-latest.min.js
+    lib_dir: libs
+    nature:
+      #highlightStyle: default
+      highlightLines: true
+      countIncrementalSlides: false
+      titleSlideClass: ["middle", "center"]
+      ratio: "16:9"
+      beforeInit: ["https://platform.twitter.com/widgets.js", "libs/cols_macro.js"]
+      navigation:
+        scroll: false # disable slide transitions by scrolling
+    css: ["libs/lyngs_style.css", default, rutgers-fonts, libs/cols.css, "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap-grid.min.css", "https://use.fontawesome.com/releases/v5.7.2/css/all.css", "libs/css/academicons.min.css"]
+---
+class: title-slide
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(tidyverse)
+library(knitr)
+library(DiagrammeR)
+```
+
+.row[
+.col-7[
+.title[
+# Hello, R Markdown!
+]
+.subtitle[
+## Day 2: Applications
+### Project TIER Faculty Development Workshop, 12-13 March 2019
+]
+.author[
+### Ulrik Lyngs <br> [ulriklyngs.com](https://ulriklyngs.com) <br> [<i class="fab fa-github"></i>](https://github.com/ulyngs) [<i class="fab fa-twitter"></i>](https://twitter.com/ulyngs)[<i class="ai ai-google-scholar"></i>](https://scholar.google.co.uk/citations?user=e8XDAzcAAAAJ&hl=en)
+]
+
+.affiliation[
+### Department of Computer Science <br> University of Oxford
+]
+
+]
+
+.col-5[
+
+.logo[
+```{r}
+knitr::include_graphics("figures/rmarkdown.png")
+```
+]
+
+Slides:<br> [ulyngs.github.io/rmarkdown-workshop-2019](https://ulyngs.github.io/rmarkdown-workshop-2019/)
+
+Materials:<br> [github.com/ulyngs/rmarkdown-workshop-2019](https://github.com/ulyngs/rmarkdown-workshop-2019)
+
+]
+
+]
+
+---
+# Day 1 Recap
+
+.row[
+.col-4[
+### Markdown syntax
+\*italics\* and \*\*bold\*\*  
+  
+  <span>&#96;</span>inline code&#96;
+  
+  sub~2~/superscript^2^
+  
+  \~\~strikethrough\~\~
+  
+  escaped: \\* \\_ \\\
+  
+  endash: --, emdash: ---
+  
+  \> blockquote
+  
+  \# Header 1
+  
+  \#\# Header 2
+  
+  Roses are red \ <br>
+  Violets are blue
+]
+
+.col-8[
+
+]
+
+]
+
+
+---
+# Day 1 Recap
+
+.row[
+.col-4[
+### Markdown syntax
+\*italics\* and \*\*bold\*\*  
+  
+  <span>&#96;</span>inline code&#96;
+  
+  sub~2~/superscript^2^
+  
+  \~\~strikethrough\~\~
+  
+  escaped: \\* \\_ \\\
+  
+  endash: --, emdash: ---
+  
+  \> blockquote
+  
+  \# Header 1
+  
+  \#\# Header 2
+  
+  Roses are red \ <br>
+  Violets are blue
+]
+
+.col-4[
+### Including code
+
+**Chunks**:<br>
+````markdown
+`r ''````{r my-chunk, echo=TRUE}
+# this is a code chunk
+num_rows <- nrow(cars)
+
+```
+````
+
+**Inline**:<br>
+*There are <span>&#96;</span>r num_rows&#96; rows in the `cars` dataset.*
+
+.center[-->]
+
+*There are `r nrow(cars)` rows in the `cars` dataset.*
+
+]
+
+.col-4[
+
+]
+
+]
+
+---
+
+# Day 1 Recap
+
+.row[
+.col-4[
+### Markdown syntax
+\*italics\* and \*\*bold\*\*  
+  
+  <span>&#96;</span>inline code&#96;
+  
+  sub~2~/superscript^2^
+  
+  \~\~strikethrough\~\~
+  
+  escaped: \\* \\_ \\\
+  
+  endash: --, emdash: ---
+  
+  \> blockquote
+  
+  \# Header 1
+  
+  \#\# Header 2
+  
+  Roses are red \ <br>
+  Violets are blue
+]
+
+.col-4[
+### Including code
+
+**Chunks**:<br>
+````markdown
+`r ''````{r my-chunk, echo=TRUE}
+# this is a code chunk
+num_rows <- nrow(cars)
+
+```
+````
+
+**Inline**:<br>
+*There are <span>&#96;</span>r num_rows&#96; rows in the `cars` dataset.*
+
+.center[-->]
+
+*There are `r nrow(cars)` rows in the `cars` dataset.*
+
+]
+
+.col-4[
+### Citations & cross-referencing
+```yaml
+---
+output: bookdown::html_document2
+---
+```
+
+````markdown
+`r ''````{r captain, fig.cap="A meme"}
+knitr::include_graphics("cap.jpeg")
+
+```
+````
+
+Syntax: 
+`\@ref(label)` (sections)
+`\@ref(fig:label)` (plots & images)
+`\@ref(tab:label)` (tables)
+
+*Figure* \@ref(fig:captain) *shows a great meme.*
+
+.center[-->]
+
+*Figure 1.1 shows a great meme.*
+
+]
+
+]
+
+---
+
+class: middle, larger-body
+
+.center[
+# Plan
+]
+
+
+.pull-left.grey[
+## Day 1: Fundamentals
+.large[
+- Why R Markdown?
+- Basic syntax: Markdown & code
+- Final pieces: Citations & cross-referencing
+]
+]
+
+.pull-right[
+## Day 2: Applications
+.large[
+- Customising your output
+- Workflows, collaboration & teaching
+- Putting it all together
+]
+]
+
+---
+class: center, middle, inverse
+
+# Customising your output
+
+???
+we'll look at this in two ways
+- using YAML options to directly customise the output (you might use this for yourself or you might want to create a template that students should download and fill in)
+- adopting a publisher's LaTeX (or Word) template for use with R Markdown
+
+---
+class: larger-body
+
+## Simple customisation via YAML header
+
+- Many simple customisation options are easily set in the YAML header
+
+--
+- The options available depend on the output format (HTML, PDF, etc.), see [bookdown.org](https://bookdown.org/yihui/rmarkdown/documents.html)
+
+--
+- Let's have a look at some common options...
+
+
+---
+### Table of contents
+
+.pull-left[
+```yaml
+---
+title: "Output customisation"
+output: 
+  bookdown::html_document2:
+*   toc: true
+---
+```
+]
+
+--
+.pull-right[
+```{r}
+knitr::include_graphics("figures/html_toc.png")
+```
+]
+
+
+---
+### Table of contents
+
+.pull-left[
+```yaml
+---
+title: "Output customisation"
+output: 
+  bookdown::html_document2:
+    toc: true
+*   toc_float: true
+---
+```
+]
+
+--
+.pull-right[
+```{r}
+include_graphics("figures/html_toc_float.png")
+```
+]
+
+---
+### Table of contents
+
+.pull-left[
+```yaml
+---
+title: "Output customisation"
+output: 
+* bookdown::pdf_document2:
+    toc: true
+---
+```
+]
+
+--
+.pull-right[
+```{r}
+include_graphics("figures/pdf_toc.png")
+```
+]
+
+---
+### Table of contents
+
+.pull-left[
+```yaml
+---
+title: "Output customisation"
+output: 
+* bookdown::word_document2:
+    toc: true
+---
+```
+]
+
+--
+.pull-right[
+```{r}
+include_graphics("figures/word_toc.png")
+```
+]
+
+---
+class: larger-body
+
+### Putting content in tabs in HTML output
+- Adding `{.tabset}` after a header makes its sub-headers appear in tabs instead of standalone sections.
+
+
+--
+.pull-left[
+
+For example:
+
+```markdown
+# Test header {.tabset}
+
+## Including tables
+
+(tab content)
+
+## Including plots
+
+(tab content)
+
+```
+
+]
+
+--
+.pull-right[
+```{r, out.width="80%"}
+include_graphics("figures/html_tabset.png")
+```
+
+]
+
+---
+class: larger-body
+
+## Appearance and style
+- In HTML output, you can use `theme` or a custom **.css** style sheet
+
+--
+- `theme` options (see them at [bootswatch.com](https://bootswatch.com/)) : *“cerulean”, “journal”, “flatly”, “darkly”, “readable”, “spacelab”, “united”, “cosmo”, “lumen”, “paper”, “sandstone”, “simplex”, “yeti”*
+
+
+--
+.pull-left[
+For example:
+```yaml
+---
+title: "Output customisation"
+output: 
+  bookdown::html_document2:
+    toc: true
+    toc_float: true
+    theme: darkly
+---
+```
+]
+
+
+.pull-right[
+```{r, out.width="75%"}
+include_graphics("figures/html_theme.png")
+```
+
+]
+
+---
+class: larger-body
+## Appearance and style
+- For fine-grained control, supply a specific template to use for the output document:
+
+```yaml
+---
+title: "Output customisation"
+output: 
+  bookdown::html_document2:
+*    template: my_template.html
+
+  bookdown::pdf_document2:
+*    template: my_template.tex
+
+  bookdown::word_document2:
+*    reference_docx: my-styles.docx #note: 'reference_docx'
+---
+```
+
+--
+- For more on HTML templates, see the [pandoc documentation](http://pandoc.org/MANUAL.html#templates) and/or have a look at the [default HTML template](https://github.com/jgm/pandoc-templates/blob/master/default.html5)
+- For more on Word templates, watch this short video ([vimeo.com/110804387](https://vimeo.com/110804387)), or read this article ([rmarkdown.rstudio.com/articles_docx.html](https://rmarkdown.rstudio.com/articles_docx.html))
+
+---
+class: larger-body
+## Using LaTeX templates with R Markdown
+
+--
+- The [`rticles`](https://github.com/rstudio/rticles) package contains a range of ready-made templates for paper submissions
+
+--
+- At the moment, many of the templates are not well documented, and it can be difficult to understand what's going on under the hood
+
+--
+- It's useful to know a bit about how it works, if you need to submit a paper formatted with LaTeX but want to write in R Markdown
+
+--
+- Let's have a look at the [PLOS LaTeX template](http://www.latextemplates.com/template/public-library-of-science-plos)
+
+
+---
+## What's a LaTeX template anyway?
+
+.pull-left[
+```{r}
+include_graphics("figures/plos_latex.png")
+```
+
+]
+
+
+--
+.pull-right[
+```{r}
+include_graphics("figures/template_compiled.png")
+```
+]
+
+
+---
+## Using LaTeX templates with R Markdown
+.pull-left[
+```yaml
+---
+output: 
+  bookdown::pdf_document2:
+    template: plos_latex_template.tex
+---
+```
+]
+
+
+--
+.pull-right[
+```{r}
+include_graphics("figures/template_error.png")
+```
+]
+
+---
+class: center, middle, inverse
+
+![](figures/rmarkdownflow.png)
+
+---
+class: larger-body
+
+## plos_latex_template.tex
+- Dollar signs have special meaning for `pandoc`
+
+
+--
+- in the template document, `pandoc` will look for stuff wrapped in dollar signs and insert the corresponding content in your **.Rmd** file, before the output document is created
+
+
+--
+- `$` is escaped with another `$`
+
+
+--
+.pull-left[
+If we take a look at line 57 in **plos_latex_template.tex** we see this:
+```latex
+% For example, x$^2$ is incorrect; 
+this should be formatted as $x^2$ 
+(or $\mathrm{x}^2$ if the romanized font is desired).
+```
+]
+
+
+--
+.pull-right[
+- We change to this:<br>
+<br>
+
+```latex
+% For example, x$$^2$$ is incorrect; 
+this should be formatted as $$x^2$$ 
+(or $$\mathrm{x}^2$$ if the romanized font is desired).
+```
+]
+
+---
+class: larger-body
+
+## plos_latex_template.tex
+- Fix this throughout and we get normal compilation of the LaTeX template to PDF:
+
+
+--
+.pull-left[
+
+```yaml
+---
+output: 
+  bookdown::pdf_document2:
+    template: plos_latex_template_adapted.tex
+---
+```
+
+```{r, out.width="88%", fig.align='center'}
+include_graphics("figures/template_escapes.png")
+```
+
+
+]
+
+
+--
+.pull-right[
+
+```{r, out.width = "95%"}
+include_graphics("figures/template_compiled.png")
+```
+]
+
+---
+class: larger-body
+
+## Plug in information from our **.Rmd** file
+- Find the places in the LaTeX template where you want to insert content from your R Markdown document
+
+--
+- Wrap variables from your YAML header in `$`'s to insert them, e.g. `\textbf\newline{$title$}` 
+
+--
+- To insert all the content after your YAML header, type `$body$`
+
+
+--
+.pull-left[
+```latex
+\textbf\newline{Title of submission to PLOS journals}
+\\
+Name1 Surname\textsuperscript{1,2\Yinyang},
+Name2 Surname\textsuperscript{2\Yinyang},
+Name3 Surname\textsuperscript{2,3\textcurrency},
+Name4 Surname\textsuperscript{2},
+Name5 Surname\textsuperscript{2\ddag},
+Name6 Surname\textsuperscript{2\ddag},
+Name7 Surname\textsuperscript{1,2,3*},
+with the Lorem Ipsum Consortium\textsuperscript{\textpilcrow}
+\\
+\textbf{1} Affiliation Dept/Program/Center, Institution Name, City, State, Country
+\\
+\textbf{2} Affiliation Dept/Program/Center, Institution Name, City, State, Country
+```
+]
+
+.pull-right[
+```latex
+*\textbf\newline{$title$}
+\\
+*$author.name$\textsuperscript{1,2\Yinyang},
+Name2 Surname\textsuperscript{2\Yinyang},
+Name3 Surname\textsuperscript{2,3\textcurrency},
+Name4 Surname\textsuperscript{2},
+Name5 Surname\textsuperscript{2\ddag},
+Name6 Surname\textsuperscript{2\ddag},
+Name7 Surname\textsuperscript{1,2,3*},
+with the Lorem Ipsum Consortium\textsuperscript{\textpilcrow}
+\\
+*\textbf{1} $author.affiliation$, $author.city$, $author.country$
+\\
+\textbf{2} Affiliation Dept/Program/Center, Institution Name, City, State, Country
+```
+]
+
+
+---
+## Plug in information from our **.Rmd** file
+
+.pull-left[
+```latex
+\section*{Abstract}
+Lorem ipsum dolor sit amet...
+```
+
+```latex
+\section*{Introduction}
+Lorem ipsum dolor sit...
+```
+
+]
+
+.pull-right[
+```latex
+\section*{Abstract}
+$abstract$
+```
+
+```latex
+$body$
+```
+]
+
+---
+## Plug in information from our **.Rmd** file
+
+.pull-left[
+```yaml
+---
+title: This Is the Greatest and Best Paper in the World (Tribute)
+abstract: This is the best abstract in the world
+author:
+  name: Ulrik Lyngs
+  affiliation: Department of Computer Science, University of Oxford
+  city: Oxford
+  country: United Kingdom
+output: 
+  bookdown::pdf_document2:
+    template: plos_latex_template_adapted.tex
+---
+
+# Introduction
+
+"Tribute" is the first single of Tenacious D's self-titled debut album. 
+It was released July 16, 2002.
+The song is a tribute to what Gass and Black refer to as "The Greatest Song in the World" (often confused as the song's title), which Tenacious D themselves came up with, but have since forgotten. 
+It was released as a downloadable track for Rock Band in addition to appearing as a playable track for Guitar Hero Live.
+
+```
+]
+
+.pull-right[
+```{r, out.width="88%"}
+include_graphics("figures/template_plos.png")
+```
+
+]
+
+---
+class: practice-slide, larger-body
+
+.center[
+# Time for practice!
+See 
+`examples/output_customisation.Rmd` (GitHub: [Rmd](https://github.com/ulyngs/rmarkdown-workshop-2019/blob/master/examples/output_customisation.Rmd), [HTML](../examples/output_customisation.html))) 
+and 
+`examples/using_latex_templates.Rmd` (GitHub: [Rmd](https://github.com/ulyngs/rmarkdown-workshop-2019/blob/master/examples/using_latex_templates.Rmd), [HTML](../examples/using_latex_templates.html))
+]
+
+.row[
+
+.col-4[
+## Beginner
+]
+.col-4[
+## Intermediate
+]
+.col-4[
+## Advanced
+]
+
+]
+
+--
+.row[
+
+.col-4.beginner[
+1. Toggle table of contents on and off in two different output formats.
+2. Try customising the depth of headings to include in the table of contents with e.g. `toc_depth: 2` 
+3. Have a scroll through the range of output formats available in [R Markdown: The Definitive Guide](https://bookdown.org/yihui/rmarkdown/html-document.html).
+
+]
+  
+.col-4.intermediate[
+Have a look at the ['Output formats' section of R Markdown: The Definitive Guide](https://bookdown.org/yihui/rmarkdown/html-document.html):
+1. How do you output to HTML where code is hidden but the user can choose to see it?
+2. Try to use `reference_docx` to output to Word document. Can you succesfully customise the header and body styles?
+]
+
+.col-4.advanced[
+1. How would you check if R Markdown is doing what you think it does when you're trying to tweak the output?
+2. Find a LaTeX template for submission to your favorite journal and have a quick stab at getting an **.Rmd** file to use it as a template
+]
+]
+
+---
+class: center, middle, inverse
+# Workflows, collaboration, teaching
+
+???
+- Okay, so let's talk about how r markdown fits into concrete workflows
+- we'll start with the structure you go through when analysing data
+- then we'll work our way out to how you collaborate with others
+- and then finally how these general workflows apply to teaching
+- this part is going to be more discussion based - we'll have you dicuss what you do, and then I'll put forward best practices as per the people whose advice I follow within the R community
+
+---
+class: middle, center
+
+```{r}
+include_graphics("figures/workflow_general.png")
+```
+
+.footnote.black[
+[r4ds.had.co.nz/explore-intro.html](https://r4ds.had.co.nz/explore-intro.html)
+]
+
+???
+- Explain this
+- We'll take 5 minutes for you in pairs to walk through what you actually do when you go through this process - be as concrete as possible! Where do you save your files? Do you use separate scripts for different parts of the analysis etc.? (after 2.5 minutes we swith)
+- (get a couple of people to share what they do)
+- now i'll annotate this and point you to some best practices
+
+---
+class: middle, larger-body
+> One day you will need to quit R, go do something else and return to your analysis later, perhaps months or years later...<br>
+
+
+--
+> One day you will need to hand an analysis over to someone else to critique, extend, or reuse...<br>
+
+
+--
+> To handle these real life situations, you need to make two decisions:
+
+--
+> - What about your analysis is "real", i.e. you will save it as your lasting record of what happened?
+
+--
+> - Where does your analysis “live"?
+
+
+--
+> --- [Jenny Bryan, UBC & RStudio](https://www.stat.ubc.ca/~jenny/STAT545A/block01_basicsWorkspaceWorkingDirProject.html)
+
+---
+class: larger-body
+## What about your analysis is .color["real"]
+
+- "Interactive" typing of your code
+
+```{r, echo = TRUE}
+x <- 5
+y <- 10
+
+x + y
+```
+
+
+--
+.pull-left[
+- Saving your code as a script <br> or .Rmd file <-- .color["real"]
+]
+
+.pull-right[
+```{r, out.width="80%"}
+include_graphics("figures/script_is_real.png")
+```
+]
+
+
+---
+## Where does your analysis .color["live"]
+
+### What do you do when you open RStudio?
+.pull-left[
+![](figures/IT_doggo.jpg)
+]
+
+.pull-right[
+![](figures/where_is_my_data.png)
+]
+
+
+--
+- Setting your working directory (path): `setwd("me/folder-that-only-exists-on-this-computer")`??
+
+
+---
+class: center, middle, inverse
+
+![](figures/matrix.jpg)
+
+# Best practice: R Projects
+
+---
+## What is an R Project?
+
+--
+.pull-left[
+- A way to keep all files (scripts, inputs, figures) associated with a project organized in one place
+
+- Keeps your files and scripts in a centralized working directory
+
+- Allows for version control and portability
+]
+
+
+--
+.pull-right[
+File > New Project...
+
+```{r, out.width="100%", fig.align='center'}
+include_graphics("figures/projects1.png")
+```
+]
+
+???
+- do a quick demo
+
+
+---
+# Bonus tip: Global and Project options
+It's a good idea to stop RStudio from saving and restoring your workspace state. <br>
+Set this in Tools > Global Options...      ||       Tools > Project Options...
+
+
+--
+.pull-left[
+
+```{r, out.width="80%"}
+include_graphics("figures/bad.png")
+```
+## Bad (but default!!)
+]
+
+
+--
+.pull-right[
+```{r, out.width="80%"}
+include_graphics("figures/good.png")
+```
+## Good
+]
+
+---
+## Naming and organising things
+
+```{r, out.width="60%", fig.align='center'}
+include_graphics("figures/naming_things.png")
+```
+
+.footnote[
+https://speakerdeck.com/jennybc/how-to-name-files
+]
+
+---
+class: middle, center
+
+```{r}
+include_graphics("figures/workflow_general.png")
+```
+
+
+--
+.import-annotation.color[
+Use R projects
+
+[JB's naming advice](https://speakerdeck.com/jennybc/how-to-name-files)
+
+`data/data-raw/`
+]
+
+
+
+--
+.tidy-annotation.color[
+`data_tidying.Rmd`
+
+`data/data-processed/`
+
+[Alison Hill's style:](https://community.rstudio.com/t/convince-me-to-start-using-r-markdown/1636/6)
+.left[
+```r
+{r load_scripts, include=FALSE}
+source('scripts/01-import.R')
+source('scripts/02-clean-names.R')
+source('scripts/03-tidy.R')
+etc.
+```
+]
+
+]
+
+
+--
+.explore-annotation.color[
+`data_analysis.Rmd`
+]
+
+
+--
+.communicate-annotation.color[
+`report.Rmd`
+]
+
+
+---
+class: center, middle, inverse
+
+# Collaboration
+
+???
+- Similarly, we'll take 5 minutes for you in pairs to walk through how you currently collaborate with other people on analysing results and writing them up 
+- Which file sharing tools do you use? How do you know what's the current version? etc.
+
+---
+## What do ideal collaboration workflows look like?
+
+--
+```{r, fig.align='center'}
+include_graphics("figures/final_final.jpg")
+```
+
+---
+class: larger-body
+
+## What do ideal collaboration workflows look like?
+1. Version control
+
+--
+2. Clear agreement on current 'master' version
+
+--
+3. Ability to do (or deal with) simultaneous editing
+
+---
+
+```{r}
+include_graphics("figures/version_control.png")
+```
+
+???
+credit: https://github.com/will-r-chase/blog/blob/master/static/slides/intro_R_anthropology_2018.Rmd
+
+---
+.pull-left[
+## GitHub
+
+```{r}
+include_graphics("figures/git_version_control.png")
+```
+
+
+]
+
+
+--
+.pull-right[
+## Open Science Framework
+```{r}
+include_graphics("figures/osf_version_control.png")
+include_graphics("figures/osf_checkout.png")
+```
+]
+
+
+--
+.footnote[
+There's an [R package for interfacing with OSF!](https://centerforopenscience.github.io/osfr/)
+]
+
+---
+class: larger-body
+## Simultaneous editing?
+
+Gold standard:
+
+--
+- Google Docs (great commenting features but no citation ability)
+
+--
+- [Overleaf](https://www.overleaf.com) (Google Docs for LaTeX - powerful, but only for LaTeX)
+
+
+--
+.large.center[
+How can these play nice with R Markdown?
+]
+
+???
+- this more explicit things are great for writing code, but what about writing text? Here's it's amazing to be able to do things collaboratively in real time
+
+---
+class: very-large-body
+## Simultaneous editing?
+
+--
+Option 1: Don't.
+
+
+--
+Option 2: Knit to Word > upload to Google Docs > comment and suggest edits there > manually integrate changes into .Rmd source file<sup>1</sup>
+
+.footnote[
+[1] Great blog post here: https://livefreeordichotomize.com/2018/09/14/one-year-to-dissertate/
+]
+
+
+--
+Option 3: Knit to PDF with `keep_tex: true` > upload project folder to Overleaf > comment and suggest edits in **.tex** file > manually integrate changes into .Rmd source file
+
+
+--
+Option 4: Edit raw R Markdown on Google Docs
+
+
+---
+class: inverse, middle
+
+.row[
+
+  .col-3[
+  ]
+
+.col-6[
+<blockquote class="twitter-tweet" data-lang="en-gb"><p lang="en" dir="ltr">Quick demo of the rmdrive 📦workflow - create rmarkdown document in R, add text on google docs, resync to local rmd, knit. <a href="https://twitter.com/hashtag/rstats?src=hash&amp;ref_src=twsrc%5Etfw">#rstats</a> <a href="https://t.co/h09TI8q4w0">pic.twitter.com/h09TI8q4w0</a></p>&mdash; Dr Emily Kothe (@emilyandthelime) <a href="https://twitter.com/emilyandthelime/status/1102015059486621697?ref_src=twsrc%5Etfw">3 March 2019</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+]
+
+  .col-3[
+  ]
+
+]
+
+---
+class: center, middle, inverse
+
+# Teaching
+
+???
+- again, discuss with your partner for 4 minutes some of the thoughts you at the moment have about using R Markdown in teaching
+
+---
+class: larger-body
+# Suggestions from the R community
+
+### Assignment submissions with R Markdown 
+
+--
+> For teaching statistics, I ask students to submit R Markdown files and a knitted version with echo = TRUE as a global option. <br>
+
+--
+> This has made grading assignments so much easier, and the students can work in one document to analyze AND interpret data (rather than working in R console, and copying/pasting R code and output into a text editor or Word document, then adding narrative).
+
+
+> [Alison Presmanes Hill](Alison Presmanes Hill on the RStudio Community
+https://community.rstudio.com/t/convince-me-to-start-using-r-markdown/1636/6) 
+
+
+---
+class: larger-body
+# Suggestions from the R community
+
+### Assignment submissions with R Markdown
+### Use [rstudio.cloud](https://rstudio.cloud):
+
+
+--
+- Use RStudio directly in the browser, with no need to install or configure anything on students' computers
+
+
+--
+- Free to use (for now)
+
+  
+--
+- Teacher decides libraries to be installed in the virtual environment
+
+
+--
+- Video presentation here on best practices for using it in educational setting: https://resources.rstudio.com/rstudio-conf-2019/rstudio-cloud-for-education
+
+---
+class: larger-body
+# Suggestions from the R community
+
+### Assignment submissions with R Markdown
+### Use [rstudio.cloud](https://rstudio.cloud):
+### Search through [community.rstudio.com](https://community.rstudio.com/t/convince-me-to-start-using-r-markdown/1636/7) for teaching tips
+
+---
+class: larger-body
+.center[
+# Final practical!
+]
+
+.row[
+
+.col-4[
+## Beginner
+]
+.col-4[
+## Intermediate
+]
+.col-4[
+## Advanced
+]
+
+]
+
+--
+.row[
+
+.col-4.beginner[
+Make a report from scratch, starting from **final_practical_beginner.Rmd** (this document has a chunk in the beginning with overall results and plots that you can drop in to the report if you're not familiar with R)
+
+Add your name, today's date, an introduction with a few citations and an image, report some main results, cross reference something, then output to `bookdown::pdf_document2` and `bookdown::html_document2`
+]
+  
+.col-4.intermediate[
+1. Make a new R project, and create an R Markdown file with output customisation and sample content that would make it an appropriate template for students to use in a teaching situation relevant to you.
+2. Look into https://rstudio.cloud and consider possible uses of it in a teaching situation relevant to you. 
+
+]
+
+.col-4.advanced[
+1. Find out what the [Open Science Framework R package can do](https://centerforopenscience.github.io/osfr/), and suggest how it might be useful in a workflow relevant to you.
+2. Make a start on adjusting your favorite journal's LaTeX template for use with R Markdown
+
+]
+]
+
+---
+class: larger-body
+
+# Resources / learn more
+
+.pull-left[
+### R Markdown
+[R Markdown: The Definitive Guide](https://bookdown.org/yihui/rmarkdown/)
+
+[`bookdown`: Authoring Books and Technical Documents with R Markdown](https://bookdown.org/yihui/bookdown/)
+
+[R for Data Science: R Markdown](https://r4ds.had.co.nz/r-markdown.html)
+
+[Retting used to R, RStudio, and R Markdown](https://ismayc.github.io/rbasics-book/4-rmarkdown.html)
+
+Cheat sheets and Reference: In RStudio, go to
+- Help > Cheatsheets > R Markdown Cheat Sheet / R Markdown Reference Guide
+
+If you're fearless: [Advanced R Markdown: Behind the Knit Button](https://slides.yihui.name/2017-rstudio-conf-rmarkdown-Yihui-Xie.html)
+]
+
+.pull-right[
+**Workflows** <br>
+Example of R markdown workflow from start to finish: [github.com/EvaMaeRey/from_raw_data_to_paper_and_presentation](https://github.com/EvaMaeRey/from_raw_data_to_paper_and_presentation)
+
+**Learning GitHub**
+1. Hadley Wickham's guide: [r-pkgs.had.co.nz/git.html](http://r-pkgs.had.co.nz/git.html)
+2. Jenny Bryan's guide: [happygitwithr.com](https://happygitwithr.com)
+]
+
+
+---
+class: center, middle
+
+<iframe src="https://giphy.com/embed/8UF0EXzsc0Ckg" height="450" width="700" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+
+<br>
+
+Questions or comments: [ulrik.lyngs@cs.ox.ac.uk](mailto:ulrik.lyngs@cs.ox.ac.uk)
+
+???
+So this was an awful lot of content - hopefully it will be useful no matter what prior level you were at

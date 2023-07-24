@@ -1,0 +1,22 @@
+---
+title: "R Markdown Workshop"
+subtitle: "Academic Writing with R Markdown"
+date: "27 July 2023"
+author: Kamarul Ariffin Mansor
+output: 
+  html_document:
+    theme: yeti
+    includes:
+       in_header: GA_Script.html
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+This repo contains slides and teaching materials for a two hours R Markdown workshop taking place as part of the UiTM ILD Webinar Series, UiTM Kedah Branch Campus, July 27, 2023.
+
+Slides are available here:
+
+- [Day 1: Introduction to R Markdown](slides/Day1.html)
+- [Day 2: Applications of R Markdown](slides/Day2.html)
