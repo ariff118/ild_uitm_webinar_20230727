@@ -39,7 +39,7 @@ xfun::pkg_load2(c('base64enc', 'htmltools', 'mime'))
 ]
 .subtitle[
 ## Day 1: Introduction
-### ILD Webinar Series, UiTM Kedah, 27 July 2023
+### ILD Webinar Series, UiTM Kedah <br> 27 July 2023
 ]
 .author[
 ### Kamarul Ariffin Mansor <br> [UiTM Expert Profile Link](https://expert.uitm.edu.my/profile.php?id=jfJl92rZPRb9k0UzVrkKHc8BKRT+dbEhL8J6Qd6XU1o=) <br> [<i class="fab fa-github"></i>](https://github.com/ariff118) [<i class="fab fa-twitter"></i>](https://twitter.com/167118Ariffin)[<i class="ai ai-google-scholar"></i>](https://scholar.google.com/citations?user=vpLYl5kAAAAJ&hl=en)
@@ -59,9 +59,9 @@ knitr::include_graphics("figures/rmarkdown.png")
 ```
 ]
 
-Slides:<br> [ulyngs.github.io/rmarkdown-workshop-2019](https://ulyngs.github.io/rmarkdown-workshop-2019/)
+<!-- Slides:<br> [ulyngs.github.io/rmarkdown-workshop-2019](https://ulyngs.github.io/rmarkdown-workshop-2019/) -->
 
-Materials:<br> [github.com/ulyngs/rmarkdown-workshop-2019](https://github.com/ulyngs/rmarkdown-workshop-2019)
+<!-- Materials:<br> [github.com/ulyngs/rmarkdown-workshop-2019](https://github.com/ulyngs/rmarkdown-workshop-2019) -->
 
 
 ]
